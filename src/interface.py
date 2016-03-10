@@ -25,7 +25,6 @@ def init():
 
 
 def auth():
-
     print("Bienvenue sur le TheoRPG. Pour commencer, je vais avoir besoin de savoir qui vous etes.")
     player = input("Entrez votre nom >")
     if database.players.playerExist(player):
@@ -48,6 +47,7 @@ def auth():
 
 def main():
     player = auth()
+    database.inventory.setItemNumber(player, "or", 3)
 
 
 
