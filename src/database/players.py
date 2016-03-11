@@ -39,3 +39,9 @@ def playerDict(pseudo):
         return player
     else:
         return False
+
+def changePref(player, pref, value):
+    table = connectDB()
+
+    data = {"pseudo" : player, pref: value}
+    table.upsert(data, ["player"])
