@@ -7,13 +7,12 @@ MODULE DESC
 # Constants #
 
 import os
-
 import sys
 
-import database.players
+from dialog import Dialog
+
 import database.inventory
-import config
-import objets
+import database.players
 
 __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
@@ -28,7 +27,7 @@ def auth():
     print("Bienvenue sur le TheoRPG. Pour commencer, je vais avoir besoin de savoir qui vous etes.")
     player = input("Entrez votre nom >")
     if database.players.playerExist(player):
-        print("Bonjour " + player +" ! \n Entrez ici votre mot de passe afin que je vous reconnaisse.")
+        print("Bonjour " + player + " ! \n Entrez ici votre mot de passe afin que je vous reconnaisse.")
         password = input("Entrez votre mot de passe >")
         if password == database.players.playerDict(player)["password"]:
             print("Je vois que c'est bien vous :D ! Venez avec moi...")
@@ -44,12 +43,28 @@ def auth():
         return player
 
 
+def game(player):
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')  # Efface l'écran
+        d = Dialog(dialog="dialog", autowidgetsize=True)
+        d.set_background_title("TheoRPG")
+        code, tag = d.menu("Donc, que voulez-vous faire ?",
+                           choices=[("(1)", "Miner"),
+                                    ("(2)", "Creuser"),
+                                    ("(3)", "Ne rien faire")])
+        if code == d.OK:
+            if tag == "(1)":
+                d.msgbox("Vous minez dans la grotte environnante")
+                database.inventory.addToInventory(player, "pierre", 10)
+                d.msgbox("Vous trouvez 10 pierres.")
+        else:
+            print("Au revoir :D")
+            sys.exit(0)
+
 
 def main():
     player = auth()
-    database.inventory.setItemNumber(player, "or", 3)
-
-
+    game(player)
 
 
 # Check for first launch...

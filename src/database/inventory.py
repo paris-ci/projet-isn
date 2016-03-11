@@ -18,8 +18,8 @@ def createInventory(player):
 
     table.insert({"name": "or", "quantity": "0"})
 
-def getPlayerDict(player):
 
+def getPlayerDict(player):
     table = connectDB(player)
     playerDict = table.all()
 
@@ -28,20 +28,30 @@ def getPlayerDict(player):
     else:
         return False
 
+
 def setItemNumber(player, item, number, printIt=True):
     table = connectDB(player)
     if printIt:
-        old = table.find_one(name=item)["quantity"]
-        if old:
-            delta = number - int(old)
-            if delta < 0:
-                print(str(delta) + "x " + item + " (total: " + str(getItemNumber(player, item)) + ")" )
-            elif delta > 0:
-                print("+" + str(delta) + "x " + item + " (total: " + str(getItemNumber(player, item)) + ")" )
+        old = getItemNumber(player, item)
+        delta = number - int(old)
+        if delta < 0:
+            print(str(delta) + "x " + item + " (total: " + str(getItemNumber(player, item)) + ")")
+        elif delta > 0:
+            print("+" + str(delta) + "x " + item + " (total: " + str(getItemNumber(player, item)) + ")")
 
     data = {"name": item, "quantity": number}
     table.upsert(data, ["name"])
 
+
 def getItemNumber(player, item):
     table = connectDB(player)
-    return int(table.find_one(name=item)["quantity"])
+    try:
+        number = int(table.find_one(name=item)["quantity"])
+        return number
+
+    except TypeError:
+        return 0
+
+
+def addToInventory(player, item, number):
+    setItemNumber(player, item, getItemNumber(player, item) + number)
