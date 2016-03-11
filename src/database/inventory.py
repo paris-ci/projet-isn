@@ -35,9 +35,13 @@ def setItemNumber(player, item, number, printIt=True):
         if old:
             delta = number - int(old)
             if delta < 0:
-                print(str(delta) + "x " + item)
+                print(str(delta) + "x " + item + " (total: " + str(getItemNumber(player, item)) + ")" )
             elif delta > 0:
-                print("+" + str(delta) + "x " + item)
+                print("+" + str(delta) + "x " + item + " (total: " + str(getItemNumber(player, item)) + ")" )
 
     data = {"name": item, "quantity": number}
     table.upsert(data, ["name"])
+
+def getItemNumber(player, item):
+    table = connectDB(player)
+    return int(table.find_one(name=item)["quantity"])
