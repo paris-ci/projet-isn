@@ -27,7 +27,7 @@ def init():
 def auth():
     d.msgbox("Bienvenue sur le TheoRPG. Pour commencer, je vais avoir besoin de savoir qui vous etes.")
     code, player = d.inputbox("Entrez votre nom")
-    if database.players.playerExist(player):
+    if database.players.playerExist(player) and code == d.OK:
         d.msgbox("Bonjour " + player + " !")
         code, password = d.passwordbox("Entrez votre mot de passe. Celui ci ne s'affiche pas pour des rasions de sécurité")
         if password == database.players.playerDict(player)["password"] and code == d.OK:
@@ -36,6 +36,9 @@ def auth():
         else:
             d.msgbox("Sale usurpateur ! Tu crois pouvoir t'en tirer avec ca ? C'est pas un mot de passe correct !")
             sys.exit(0)
+    elif code != d.OK:
+        d.msgbox("Ok, pas de soucis, tu ne veux pas jouer, je ne vais pas t'importuner avec ca ! A pluche :D")
+        sys.exit(0)
     else:
         d.msgbox("Bonjour, je ne vous connais pas ! Ce n'est pas un probleme, présentez vous !")
         code, password = d.passwordbox("Entrez un mot de passe. Celui ci ne s'affiche pas pour des rasions de sécurité")
@@ -64,7 +67,8 @@ def game(player):
         code, tag = d.menu("Donc, que voulez-vous faire ?",
                            choices=[("(1)", "Miner"),
                                     ("(2)", "Creuser"),
-                                    ("(3)", "Ne rien faire")],
+                                    ("(3)", "Afficher mon inventaire"),
+                                    ("(4)", "Ne rien faire")],
                            ok_label="Ok, je veux faire ca",
                            cancel_label="Préférances/Quitter")
         if code == d.OK:
@@ -81,13 +85,20 @@ def game(player):
                 database.inventory.addToInventory(player, "brindilles", 20)
                 database.inventory.addToInventory(player, "terre", 5)
                 d.msgbox("Vous trouvez 5 terre et 2 brindilles.")
+            elif tag == "(3)":
+                playerInv = database.inventory.getPlayerDict(player)
+                message = "Vous avez dans votre inventaire :\n\n"
+                for item in playerInv:
+                    if item["quantity"] != 0:
+                        message += item["quantity"] + "x " + item["name"] + "\n"
+                d.msgbox(message)
 
         else:
             code, tag = d.menu("Menu des préférances :",
                                choices=[("(1)", "Revenir au jeu"),
                                         ("(2)", "Changer mon mot de passe"),
                                         ("(3)", "Quitter")],
-                               ok_label="Ok, je veux faire ca",
+                               ok_label="Je choisis ca.",
                                cancel_label="Annuler")
             if tag == "(1)":
                 pass
