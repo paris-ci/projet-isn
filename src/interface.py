@@ -85,11 +85,12 @@ def game(player):
                 database.inventory.addToInventory(player, "brindilles", 20)
                 database.inventory.addToInventory(player, "terre", 5)
                 d.msgbox("Vous trouvez 5 terre et 2 brindilles.")
+                progress(10, "Je rentre à la maison...")
             elif tag == "(3)":
                 playerInv = database.inventory.getPlayerDict(player)
                 message = "Vous avez dans votre inventaire :\n\n"
                 for item in playerInv:
-                    if item["quantity"] != 0:
+                    if int(item["quantity"]) != 0:
                         message += item["quantity"] + "x " + item["name"] + "\n"
                 d.msgbox(message)
 
