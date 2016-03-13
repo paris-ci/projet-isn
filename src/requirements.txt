@@ -1,0 +1,5 @@
+# PiP requirements file. user with pip install -r requirements.txt
+# You also need to install dialog with your favorite package mamanger (CygWin on Windows, brew/port on OS X, and apt-get / yum/ yaourt / ... for your linux distro)
+
+pythondialog
+dataset
