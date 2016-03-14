@@ -138,7 +138,7 @@ if __name__ == '__main__':
         print("Lancement en cours...")
         time.sleep(1)
 
-    d = Dialog(dialog="dialog")  # , autowidgetsize=True
+    d = Dialog(dialog="dialog", autowidgetsize=True)  # , autowidgetsize=True
     d.set_background_title("TheoRPG")
     try:
         main()
