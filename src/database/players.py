@@ -7,22 +7,26 @@ __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
 
 import time
+
 import dataset
 
 
 def connectDB():
     return dataset.connect('sqlite:///databases/players.db')["players"]
 
+
 def init_players():
     connectDB()
+
 
 def newplayer(pseudo, plainTextPassword):
     table = connectDB()
 
-    table.insert({"pseudo": pseudo, "password":plainTextPassword, "timeJoined": int(time.time()), "lastConnect": time.time()})
+    table.insert({"pseudo": pseudo, "password": plainTextPassword, "timeJoined": int(time.time()),
+                  "lastConnect": time.time()})
+
 
 def playerExist(pseudo):
-
     table = connectDB()
 
     if table.find_one(pseudo=pseudo):
@@ -30,8 +34,8 @@ def playerExist(pseudo):
     else:
         return False
 
-def playerDict(pseudo):
 
+def playerDict(pseudo):
     table = connectDB()
     player = table.find_one(pseudo=pseudo)
 
@@ -40,8 +44,9 @@ def playerDict(pseudo):
     else:
         return False
 
+
 def changePref(player, pref, value):
     table = connectDB()
 
-    data = {"pseudo" : player, pref: value}
+    data = {"pseudo": player, pref: value}
     table.upsert(data, ["pseudo"])

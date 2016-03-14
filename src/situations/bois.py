@@ -8,7 +8,6 @@ from util import progress, showInventory
 
 
 def base(d, player):
-
     code, tag = d.menu("Vous êtes à la mine. Que voulez-vous faire ?",
                        choices=[("(1)", "Fouiller la terre"),
                                 ("(2)", "Rentrer à la maison"),
@@ -32,5 +31,3 @@ def base(d, player):
             return True
     else:
         return "pref"
-
-

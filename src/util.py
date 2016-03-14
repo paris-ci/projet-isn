@@ -7,7 +7,10 @@ __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
 
 import time
+
 import database.inventory
+
+
 def progress(d, pause, text):
     d.gauge_start(text=text)
     for i in range(0, 100):
@@ -16,8 +19,8 @@ def progress(d, pause, text):
 
     d.gauge_stop()
 
-def showInventory(d, player):
 
+def showInventory(d, player):
     playerInv = database.inventory.getPlayerDict(player)
     message = "Vous avez dans votre inventaire :\n\n"
     for item in playerInv:

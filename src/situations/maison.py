@@ -1,17 +1,21 @@
 # -*- coding:Utf-8 -*-
 # !/usr/bin/env python3.5
 # Endroit de base dans le jeu, quand le joueur arrive pour la premiere fois.
+# Temps de voyage : Maison => Mine  : 20 secondes
+#                   Maison => Foret : 10 secondes
+
 import database.inventory
 import database.players
 from util import progress, showInventory
 
+
 def base(d, player):
     code, tag = d.menu("Donc, que voulez-vous faire ?",
-                           choices=[("(1)", "Aller à la mine"),
-                                    ("(2)", "Aller à la foret"),
-                                    ("(3)", "Afficher mon inventaire")],
-                           ok_label="Ok, je veux faire ca",
-                           cancel_label="Préférances/Quitter")
+                       choices=[("(1)", "Aller à la mine"),
+                                ("(2)", "Aller à la foret"),
+                                ("(3)", "Afficher mon inventaire")],
+                       ok_label="Ok, je veux faire ca",
+                       cancel_label="Préférances/Quitter")
     if code == d.OK:
         if tag == "(1)":
             progress(d, 20, "Vous allez vers la mine")

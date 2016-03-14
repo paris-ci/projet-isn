@@ -8,4 +8,3 @@ MODULE DESC
 
 __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
-

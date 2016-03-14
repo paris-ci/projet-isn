@@ -14,9 +14,9 @@ from dialog import Dialog
 
 import database.inventory
 import database.players
+import situations.bois
 import situations.maison
 import situations.mine
-import situations.bois
 
 __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
@@ -33,7 +33,7 @@ def auth():
     if database.players.playerExist(player) and code == d.OK:
         d.msgbox("Bonjour " + player + " !")
         code, password = d.passwordbox(
-            "Entrez votre mot de passe. Celui ci ne s'affiche pas pour des rasions de sécurité")
+                "Entrez votre mot de passe. Celui ci ne s'affiche pas pour des rasions de sécurité")
         if password == database.players.playerDict(player)["password"] and code == d.OK:
             d.msgbox("Je vois que c'est bien vous :D ! Venez avec moi...")
             return player
@@ -53,9 +53,8 @@ def auth():
             return player
         else:
             d.msgbox(
-                "Tu me laisses moisir comme ca ? Tu ne veux pas me donner de mot de passe ? EH BAH NON ! Ca ne se passera pas comme ca !")
+                    "Tu me laisses moisir comme ca ? Tu ne veux pas me donner de mot de passe ? EH BAH NON ! Ca ne se passera pas comme ca !")
             sys.exit(0)
-
 
 
 def pref(player):
@@ -69,7 +68,7 @@ def pref(player):
         pass
     elif tag == "(2)":
         code, newpass = d.passwordbox(
-            "Entrez un mot de passe (pour des raisons de sécuritée, celui-ci ne sera pas affiché)")
+                "Entrez un mot de passe (pour des raisons de sécuritée, celui-ci ne sera pas affiché)")
         if code == d.OK:
             database.players.changePref(player, "password", newpass)
             d.msgbox("Mot de passe changé avec succés.")
@@ -93,7 +92,6 @@ def game(player):
         else:
             raise FileNotFoundError
 
-
         if ret == "pref":
             pref(player)
 
@@ -101,6 +99,7 @@ def game(player):
 def main():
     player = auth()
     game(player)
+
 
 if __name__ == '__main__':
 
@@ -110,7 +109,6 @@ if __name__ == '__main__':
         print("Le logiciel est initialisé correctement !")
         print("Lancement en cours...")
         time.sleep(1)
-
 
     d = Dialog(dialog="dialog")  # , autowidgetsize=True
     d.set_background_title("TheoRPG")

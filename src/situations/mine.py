@@ -6,8 +6,8 @@ import database.inventory
 import database.players
 from util import progress, showInventory
 
-def base(d, player):
 
+def base(d, player):
     code, tag = d.menu("Vous êtes à la mine. Que voulez-vous faire ?",
                        choices=[("(1)", "Miner dans la mine de pierre"),
                                 ("(2)", "Rentrer à la maison"),
