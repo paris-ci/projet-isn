@@ -8,12 +8,14 @@ MODULE DESC
 
 import os
 import sys
-
 import time
+
 from dialog import Dialog
 
 import database.inventory
 import database.players
+import situations.maison
+import situations.mine
 
 __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
@@ -29,7 +31,8 @@ def auth():
     code, player = d.inputbox("Entrez votre nom")
     if database.players.playerExist(player) and code == d.OK:
         d.msgbox("Bonjour " + player + " !")
-        code, password = d.passwordbox("Entrez votre mot de passe. Celui ci ne s'affiche pas pour des rasions de sécurité")
+        code, password = d.passwordbox(
+            "Entrez votre mot de passe. Celui ci ne s'affiche pas pour des rasions de sécurité")
         if password == database.players.playerDict(player)["password"] and code == d.OK:
             d.msgbox("Je vois que c'est bien vous :D ! Venez avec moi...")
             return player
@@ -45,74 +48,58 @@ def auth():
         if code == d.OK:
             database.players.newplayer(player, password)
             database.inventory.createInventory(player)
+            database.players.changePref(player, "location", "maison")
             return player
         else:
-            d.msgbox("Tu me laisses moisir comme ca ? Tu ne veux pas me donner de mot de passe ? EH BAH NON ! Ca ne se passera pas comme ca !")
+            d.msgbox(
+                "Tu me laisses moisir comme ca ? Tu ne veux pas me donner de mot de passe ? EH BAH NON ! Ca ne se passera pas comme ca !")
             sys.exit(0)
 
 
 def progress(pause, text):
     d.gauge_start(text=text)
-    for i in range(0,100):
+    for i in range(0, 100):
         d.gauge_update(i)
-        time.sleep(pause/100)
+        time.sleep(pause / 100)
 
     d.gauge_stop()
 
 
-def game(player):
-    while True:
-        os.system('cls' if os.name == 'nt' else 'clear')  # Efface l'écran
-
-        code, tag = d.menu("Donc, que voulez-vous faire ?",
-                           choices=[("(1)", "Miner"),
-                                    ("(2)", "Creuser"),
-                                    ("(3)", "Afficher mon inventaire"),
-                                    ("(4)", "Ne rien faire")],
-                           ok_label="Ok, je veux faire ca",
-                           cancel_label="Préférances/Quitter")
+def pref(player):
+    code, tag = d.menu("Menu des préférances :",
+                       choices=[("(1)", "Revenir au jeu"),
+                                ("(2)", "Changer mon mot de passe"),
+                                ("(3)", "Quitter")],
+                       ok_label="Je choisis ca.",
+                       cancel_label="Annuler")
+    if tag == "(1)":
+        pass
+    elif tag == "(2)":
+        code, newpass = d.passwordbox(
+            "Entrez un mot de passe (pour des raisons de sécuritée, celui-ci ne sera pas affiché)")
         if code == d.OK:
-            if tag == "(1)":
-                d.msgbox("Vous minez dans la grotte environnante")
-                progress(20, "Je mine...")
-                database.inventory.addToInventory(player, "pierre", 10)
-                d.msgbox("Vous trouvez 10 pierres.")
-            elif tag == "(2)":
-                d.msgbox("Vous allez vers le petit bois juste a coté de vous.")
-                progress(10, "Je marche vers le bois...")
-                d.msgbox("Vous creusez dans ce bois.")
-                progress(20, "Je creuse la terre...")
-                database.inventory.addToInventory(player, "brindilles", 20)
-                database.inventory.addToInventory(player, "terre", 5)
-                d.msgbox("Vous trouvez 5 terre et 2 brindilles.")
-                progress(10, "Je rentre à la maison...")
-            elif tag == "(3)":
-                playerInv = database.inventory.getPlayerDict(player)
-                message = "Vous avez dans votre inventaire :\n\n"
-                for item in playerInv:
-                    if int(item["quantity"]) != 0:
-                        message += item["quantity"] + "x " + item["name"] + "\n"
-                d.msgbox(message)
-
+            database.players.changePref(player, "password", newpass)
+            d.msgbox("Mot de passe changé avec succés.")
         else:
-            code, tag = d.menu("Menu des préférances :",
-                               choices=[("(1)", "Revenir au jeu"),
-                                        ("(2)", "Changer mon mot de passe"),
-                                        ("(3)", "Quitter")],
-                               ok_label="Je choisis ca.",
-                               cancel_label="Annuler")
-            if tag == "(1)":
-                pass
-            elif tag == "(2)":
-                code, newpass = d.passwordbox("Entrez un mot de passe (pour des raisons de sécuritée, celui-ci ne sera pas affiché)")
-                if code == d.OK:
-                    database.players.changePref(player, "password", newpass)
-                    d.msgbox("Mot de passe changé avec succés.")
-                else:
-                    d.msgbox("Votre mot de passe n'as pas été changé.")
-            elif tag == "(3)":
-                d.msgbox("Au revoir :D")
-                sys.exit(0)
+            d.msgbox("Votre mot de passe n'as pas été changé.")
+    elif tag == "(3)":
+        d.msgbox("Au revoir :D")
+        sys.exit(0)
+
+
+def game(player):
+    os.system('cls' if os.name == 'nt' else 'clear')  # Efface l'écran
+    ret = True
+    while True:
+        loc = database.players.playerDict(player)["location"]
+        if loc == "maison":
+            ret = situations.maison.base(d, player)
+        if loc == "mine":
+            ret = situations.mine.base(d, player)
+
+
+        if ret == "pref":
+            pref(player)
 
 
 def main():
@@ -127,6 +114,6 @@ if not os.path.exists("./databases"):
     print("Lancement en cours...")
     time.sleep(1)
 
-d = Dialog(dialog="dialog") #, autowidgetsize=True
+d = Dialog(dialog="dialog")  # , autowidgetsize=True
 d.set_background_title("TheoRPG")
 main()
