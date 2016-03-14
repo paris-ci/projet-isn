@@ -10,6 +10,8 @@ import os
 import sys
 import time
 
+from raven import Client
+
 from dialog import Dialog
 
 import database.inventory
@@ -132,4 +134,13 @@ if __name__ == '__main__':
 
     d = Dialog(dialog="dialog")  # , autowidgetsize=True
     d.set_background_title("TheoRPG")
-    main()
+    try:
+        main()
+    except Exception as e:
+        client = Client('https://49aa914786e14bd693802f876db91c13:5ce6654ffc3c409c8ff900efcbbe1c60@app.getsentry.com/70494')
+        client.captureException()
+        os.system('cls' if os.name == 'nt' else 'clear')  # Efface l'écran
+        print("Malheureusement, une erreur est survenue (" + str(e) + "). Nous nous en excusons. Veuillez envoyer le rapport d'erreur suivant ainsi qu'un bref résumé des vos actions sur GitHub en suivant le lien suivant : https://github.com/paris-ci/projet-isn/issues")
+        print("=== DEBUT RAPPORT ERREUR ENVOYE AUTOMATIQUEMENT===")
+        raise
+
