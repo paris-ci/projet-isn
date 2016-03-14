@@ -18,6 +18,10 @@ def createInventory(player):
 
     table.insert({"name": "or", "quantity": "0"})
 
+def deleteInventory(player):
+    table = connectDB(player)
+    table.drop()
+
 
 def getPlayerDict(player):
     table = connectDB(player)

@@ -9,6 +9,7 @@ __licence__ = "WTFPL — 2016"
 import time
 
 import dataset
+import database.inventory
 
 
 def connectDB():
@@ -24,6 +25,11 @@ def newplayer(pseudo, plainTextPassword):
 
     table.insert({"pseudo": pseudo, "password": plainTextPassword, "timeJoined": int(time.time()),
                   "lastConnect": time.time()})
+
+def deletePlayer(pseudo):
+    table = connectDB()
+    table.delete(pseudo=pseudo)
+    database.inventory.deleteInventory(pseudo)
 
 
 def playerExist(pseudo):

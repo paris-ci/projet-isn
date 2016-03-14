@@ -61,7 +61,8 @@ def pref(player):
     code, tag = d.menu("Menu des préférances :",
                        choices=[("(1)", "Revenir au jeu"),
                                 ("(2)", "Changer mon mot de passe"),
-                                ("(3)", "Quitter")],
+                                ("(3)", "Supprimer mon compte"),
+                                ("(4)", "Quitter")],
                        ok_label="Je choisis ca.",
                        cancel_label="Annuler")
     if tag == "(1)":
@@ -75,6 +76,25 @@ def pref(player):
         else:
             d.msgbox("Votre mot de passe n'as pas été changé.")
     elif tag == "(3)":
+        code = d.yesno("Etes vous sur de voulor supprimer votre compte. IL NE POURRA ETRE RESTAURE.",
+                yes_label="Oui, je suis sur de vouloir supprimer ce compte",
+                no_label="Je te supplie, j'ai changé d'avis, je ne veux rien supprimer",
+                width=200)
+        if code == d.OK:
+            database.players.deletePlayer(player)
+            code = d.yesno("Regrettez-vous cela ?",
+                           yes_label="Non",
+                           no_label="Oui")
+            if code == d.OK:
+                d.msgbox("Le compte " + player + " à bien été supprimé. Le jeu va maintenent se fermer.")
+                sys.exit(0)
+            else:
+                d.msgbox("Nous aussi.")
+                sys.exit(0)
+        else:
+            d.msgbox("C'est bien, tu fais le bon choix. Ton compte n'est pas supprimé.")
+
+    elif tag == "(4)":
         d.msgbox("Au revoir :D")
         sys.exit(0)
 
