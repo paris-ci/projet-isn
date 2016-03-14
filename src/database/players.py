@@ -44,4 +44,4 @@ def changePref(player, pref, value):
     table = connectDB()
 
     data = {"pseudo" : player, pref: value}
-    table.upsert(data, ["player"])
+    table.upsert(data, ["pseudo"])
