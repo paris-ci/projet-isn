@@ -19,6 +19,7 @@ import database.players
 import situations.bois
 import situations.maison
 import situations.mine
+import situations.tutorial
 
 __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
@@ -32,6 +33,9 @@ def init():
 def auth():
     d.msgbox("Bienvenue sur le TheoRPG. Pour commencer, je vais avoir besoin de savoir qui vous etes.")
     code, player = d.inputbox("Entrez votre nom")
+    if player == "":
+        d.msgbox("Entre un nom d'utilisateur correct. Et pas juste un truc blanc tout moche.")
+        sys.exit(1)
     if database.players.playerExist(player) and code == d.OK:
         d.msgbox("Bonjour " + player + " !")
         code, password = d.passwordbox(
@@ -41,7 +45,7 @@ def auth():
             return player
         else:
             d.msgbox("Sale usurpateur ! Tu crois pouvoir t'en tirer avec ca ? C'est pas un mot de passe correct !")
-            sys.exit(0)
+            sys.exit(1)
     elif code != d.OK:
         d.msgbox("Ok, pas de soucis, tu ne veux pas jouer, je ne vais pas t'importuner avec ca ! A pluche :D")
         sys.exit(0)
@@ -51,7 +55,7 @@ def auth():
         if code == d.OK:
             database.players.newplayer(player, password)
             database.inventory.createInventory(player)
-            database.players.changePref(player, "location", "maison")
+            database.players.changePref(player, "location", "tutorial")
             return player
         else:
             d.msgbox(
@@ -111,6 +115,8 @@ def game(player):
             ret = situations.mine.base(d, player)
         elif loc == "bois":
             ret = situations.bois.base(d, player)
+        elif loc == "tutorial":
+            ret = situations.tutorial.base(d, player)
         else:
             raise FileNotFoundError
 
