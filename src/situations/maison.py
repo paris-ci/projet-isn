@@ -3,12 +3,12 @@
 # Endroit de base dans le jeu, quand le joueur arrive pour la premiere fois.
 import database.inventory
 import database.players
-from util import progress
+from util import progress, showInventory
 
 def base(d, player):
     code, tag = d.menu("Donc, que voulez-vous faire ?",
-                           choices=[("(1)", "Miner"),
-                                    ("(2)", "Creuser"),
+                           choices=[("(1)", "Aller à la mine"),
+                                    ("(2)", "Aller à la foret"),
                                     ("(3)", "Afficher mon inventaire")],
                            ok_label="Ok, je veux faire ca",
                            cancel_label="Préférances/Quitter")
@@ -18,17 +18,12 @@ def base(d, player):
             database.players.changePref(player, "location", "mine")
             return True
         elif tag == "(2)":
-            d.msgbox("Vous allez vers le petit bois juste a coté de vous.")
             progress(d, 10, "Vous marchez vers le bois...")
             database.players.changePref(player, "location", "bois")
             return True
 
         elif tag == "(3)":
-            playerInv = database.inventory.getPlayerDict(player)
-            message = "Vous avez dans votre inventaire :\n\n"
-            for item in playerInv:
-                if int(item["quantity"]) != 0:
-                    message += item["quantity"] + "x " + item["name"] + "\n"
-            d.msgbox(message)
+            showInventory(d, player)
+            return True
     else:
         return "pref"
