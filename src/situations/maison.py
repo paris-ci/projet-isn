@@ -19,7 +19,7 @@ def base(d, player):
             return True
         elif tag == "(2)":
             d.msgbox("Vous allez vers le petit bois juste a coté de vous.")
-            progress(d, 10, "Je marche vers le bois...")
+            progress(d, 10, "Vous marchez vers le bois...")
             database.players.changePref(player, "location", "mine")
             return True
 
