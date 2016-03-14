@@ -16,6 +16,7 @@ import database.inventory
 import database.players
 import situations.maison
 import situations.mine
+import situations.bois
 
 __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
@@ -56,14 +57,6 @@ def auth():
             sys.exit(0)
 
 
-def progress(pause, text):
-    d.gauge_start(text=text)
-    for i in range(0, 100):
-        d.gauge_update(i)
-        time.sleep(pause / 100)
-
-    d.gauge_stop()
-
 
 def pref(player):
     code, tag = d.menu("Menu des préférances :",
@@ -94,8 +87,10 @@ def game(player):
         loc = database.players.playerDict(player)["location"]
         if loc == "maison":
             ret = situations.maison.base(d, player)
-        if loc == "mine":
+        elif loc == "mine":
             ret = situations.mine.base(d, player)
+        elif loc == "bois":
+            ret = situations.bois.base(d, player)
 
 
         if ret == "pref":
@@ -106,14 +101,16 @@ def main():
     player = auth()
     game(player)
 
+if __name__ == '__main__':
 
-# Check for first launch...
-if not os.path.exists("./databases"):
-    init()
-    print("Le logiciel est initialisé correctement !")
-    print("Lancement en cours...")
-    time.sleep(1)
+    # Check for first launch...
+    if not os.path.exists("./databases"):
+        init()
+        print("Le logiciel est initialisé correctement !")
+        print("Lancement en cours...")
+        time.sleep(1)
 
-d = Dialog(dialog="dialog")  # , autowidgetsize=True
-d.set_background_title("TheoRPG")
-main()
+
+    d = Dialog(dialog="dialog")  # , autowidgetsize=True
+    d.set_background_title("TheoRPG")
+    main()
