@@ -13,5 +13,5 @@ def base(d, player):
     database.inventory.addToInventory(player, "terre", 5)
     d.msgbox("Vous trouvez 5 terre et 2 brindilles.")
     progress(d, 10, "Vous rentrez à la maison...")
-    database.players.changePref(player, "location", "bois")
+    database.players.changePref(player, "location", "maison")
     return True

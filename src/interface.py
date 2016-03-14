@@ -82,7 +82,6 @@ def pref(player):
 
 def game(player):
     os.system('cls' if os.name == 'nt' else 'clear')  # Efface l'écran
-    ret = True
     while True:
         loc = database.players.playerDict(player)["location"]
         if loc == "maison":
@@ -91,6 +90,8 @@ def game(player):
             ret = situations.mine.base(d, player)
         elif loc == "bois":
             ret = situations.bois.base(d, player)
+        else:
+            raise FileNotFoundError
 
 
         if ret == "pref":
