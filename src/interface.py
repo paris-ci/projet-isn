@@ -1,9 +1,6 @@
 # -*- coding:Utf-8 -*-
 # !/usr/bin/env python3.5
-"""
-projet-isn -- interface
-MODULE DESC 
-"""
+
 # Constants #
 
 import os
