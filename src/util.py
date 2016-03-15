@@ -12,7 +12,7 @@ import database.inventory
 
 
 def progress(d, pause, text):
-    d.gauge_start(text=text)
+    d.gauge_start(text=text, width=130)
     for i in range(0, 100):
         d.gauge_update(i)
         time.sleep(pause / 100)

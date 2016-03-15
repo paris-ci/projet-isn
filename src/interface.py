@@ -140,13 +140,19 @@ if __name__ == '__main__':
 
     d = Dialog(dialog="dialog", autowidgetsize=True)  # , autowidgetsize=True
     d.set_background_title("TheoRPG")
+    client = Client('https://49aa914786e14bd693802f876db91c13:5ce6654ffc3c409c8ff900efcbbe1c60@app.getsentry.com/70494')
+
     try:
         main()
     except Exception as e:
-        client = Client('https://49aa914786e14bd693802f876db91c13:5ce6654ffc3c409c8ff900efcbbe1c60@app.getsentry.com/70494')
-        client.captureException()
+
         os.system('cls' if os.name == 'nt' else 'clear')  # Efface l'écran
         print("Malheureusement, une erreur est survenue (" + str(e) + "). Nous nous en excusons. Veuillez envoyer le rapport d'erreur suivant ainsi qu'un bref résumé des vos actions sur GitHub en suivant le lien suivant : https://github.com/paris-ci/projet-isn/issues")
+        #client.user_context({
+        #    'last_steps': input("Que venez vous de faire juste avant l'erreur ? >")
+        #})
+        time.sleep(2)
         print("=== DEBUT RAPPORT ERREUR ENVOYE AUTOMATIQUEMENT===")
+        client.captureException()
         raise
 
