@@ -11,8 +11,8 @@ from util import progress, showInventory
 
 def base(d, player):
     code, tag = d.menu("Donc, que voulez-vous faire ?",
-                       choices=[("(1)", "Aller à la mine"),
-                                ("(2)", "Aller à la foret"),
+                       choices=[("(1)", "Prendre la route a droite de la porte vers la mine"),
+                                ("(2)", "Prendre le sentier vers la foret"),
                                 ("(3)", "Afficher mon inventaire")],
                        ok_label="Ok, je veux faire ca",
                        cancel_label="Préférances/Quitter")

@@ -85,11 +85,11 @@ def pref(player):
         else:
             d.msgbox("Votre mot de passe n'as pas été changé.")
     elif tag == "(3)":
-        code = d.yesno("Etes vous sur de voulor supprimer votre compte. IL NE POURRA ETRE RESTAURE.",
+        code = d.yesno("Etes vous sur de vouloir supprimer votre compte ? /!\ IL NE POURRA PAS ETRE RESTAURE. /!\ ",
                 yes_label="Oui, je suis sur de vouloir supprimer ce compte",
                 no_label="Je te supplie, j'ai changé d'avis, je ne veux rien supprimer",
                 width=200,
-                length=20)
+                height=7)
         if code == d.OK:
             database.players.deletePlayer(player)
             code = d.yesno("Regrettez-vous cela ?",
