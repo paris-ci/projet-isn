@@ -26,7 +26,7 @@ def base(d, player):
             return True
         elif tag == "(2)":
             if database.inventory.getItemNumber(player, "lunettes") != 0:
-                progress(d, 60, "Vous continuez sur le santier. Il est quasiment invisible.")
+                progress(d, 60, "Vous continuez sur le sentier. Il est quasiment invisible.")
                 database.players.changePref(player, "location", "villeDeNullepart")
                 return True
             else:

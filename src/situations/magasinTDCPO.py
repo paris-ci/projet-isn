@@ -36,7 +36,7 @@ def base(d, player):
                 return True
 
         elif tag == "(3)":
-            if database.inventory.getItemNumber(player, "lunettes") == 0:
+            if database.inventory.getItemNumber(player, "lunettes") <= 0:
                 d.msgbox("""Que faites vous dans ce coin perdu ? Vous ne voulez pas rejoindre la ville ?
 Comment ca quelle ville ? Mais la ville de NullePart pardi. Tu n'as pas vu le panneau ?
 Predns mes lunettes et vas-y !""")
