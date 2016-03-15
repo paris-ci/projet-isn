@@ -70,7 +70,8 @@ def pref(player):
                        choices=[("(1)", "Revenir au jeu"),
                                 ("(2)", "Changer mon mot de passe"),
                                 ("(3)", "Supprimer mon compte"),
-                                ("(4)", "Quitter")],
+                                ("(4)", "Quitter"),
+                                ("(5)", "Entrer un code")],
                        ok_label="Je choisis ca.",
                        cancel_label="Annuler")
     if tag == "(1)":
@@ -87,7 +88,8 @@ def pref(player):
         code = d.yesno("Etes vous sur de voulor supprimer votre compte. IL NE POURRA ETRE RESTAURE.",
                 yes_label="Oui, je suis sur de vouloir supprimer ce compte",
                 no_label="Je te supplie, j'ai changé d'avis, je ne veux rien supprimer",
-                width=200)
+                width=200,
+                length=20)
         if code == d.OK:
             database.players.deletePlayer(player)
             code = d.yesno("Regrettez-vous cela ?",
@@ -105,7 +107,32 @@ def pref(player):
     elif tag == "(4)":
         d.msgbox("Au revoir :D")
         sys.exit(0)
+    elif tag == "(5)":
+        code, text = d.inputbox("Entrez le code qui vous à été fourni ici :")
 
+        # Liste des codes de triche :
+        #
+        # - streetmoney >> Donne 1000 or.
+        # - homesweethome >> Téléportation instantanée à la maison
+        # - unmarsetca >> Multiplie par 10 la quantitée de chaque objet possédé
+
+
+        if code == d.OK:
+            if text == "streetmoney":
+                database.inventory.addToInventory(player, "or", 1000)
+            elif text == "homesweethome":
+                database.players.changePref(player, "location", "maison")
+            elif text == "unmarsetca":
+                playerInv = database.inventory.getPlayerDict(player)
+                for item in playerInv:
+                    if int(item["quantity"]) != 0:
+                        newqtity = int(item["quantity"]) * 10 - int(item["quantity"])
+                        database.inventory.addToInventory(player, item["name"], newqtity)
+            else:
+                d.msgbox("Le MJ : Je ne comprends pas votre demande.")
+
+        else:
+            d.msgbox("Rien ne se passe.")
 
 def game(player):
     os.system('cls' if os.name == 'nt' else 'clear')  # Efface l'écran

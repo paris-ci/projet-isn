@@ -33,7 +33,7 @@ def getPlayerDict(player):
         return False
 
 
-def setItemNumber(player, item, number, printIt=True):
+def setItemNumber(player, item, number, printIt=False):
     table = connectDB(player)
     if printIt:
         old = getItemNumber(player, item)
