@@ -20,6 +20,8 @@ import situations.bois
 import situations.maison
 import situations.mine
 import situations.tutorial
+import situations.terreDeChaisPaOu
+import situations.magasinTDCPO
 
 __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
@@ -90,7 +92,7 @@ def pref(player):
             database.players.deletePlayer(player)
             code = d.yesno("Regrettez-vous cela ?",
                            yes_label="Non",
-                           no_label="Oui")
+                           no_label="Oui") # Attention : boutons oui non inversés.
             if code == d.OK:
                 d.msgbox("Le compte " + player + " à bien été supprimé. Le jeu va maintenent se fermer.")
                 sys.exit(0)
@@ -117,6 +119,10 @@ def game(player):
             ret = situations.bois.base(d, player)
         elif loc == "tutorial":
             ret = situations.tutorial.base(d, player)
+        elif loc == "terreDeChaisPasOu":
+            ret = situations.terreDeChaisPaOu.base(d, player)
+        elif loc == "magasinTDCPO":
+            ret = situations.magasinTDCPO.base(d, player)
         else:
             raise FileNotFoundError
 

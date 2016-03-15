@@ -10,8 +10,9 @@ from util import progress, showInventory
 def base(d, player):
     code, tag = d.menu("Vous êtes dans le petit bois. Que voulez-vous faire ?",
                        choices=[("(1)", "Fouiller la terre"),
-                                ("(2)", "Rentrer à la maison"),
-                                ("(3)", "Afficher mon inventaire")],
+                                ("(2)", "Continuer sur ce sentier"),
+                                ("(3)", "Rentrer à la maison"),
+                                ("(4)", "Afficher mon inventaire")],
                        ok_label="Ok, je veux faire ca",
                        cancel_label="Préférances/Quitter")
     if code == d.OK:
@@ -23,10 +24,14 @@ def base(d, player):
             d.msgbox("Vous trouvez 5 terre et 2 brindilles.")
             return True
         elif tag == "(2)":
+            progress(d, 25, "Vous continuez sur le sentier... Il semble en bien plus mauvais état !")
+            database.players.changePref(player, "location", "terreDeChaisPasOu")
+            return True
+        elif tag == "(3)":
             progress(d, 10, "Vous rentrez à la maison...")
             database.players.changePref(player, "location", "maison")
             return True
-        elif tag == "(3)":
+        elif tag == "(4)":
             showInventory(d, player)
             return True
     else:

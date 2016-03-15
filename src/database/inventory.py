@@ -58,4 +58,8 @@ def getItemNumber(player, item):
 
 
 def addToInventory(player, item, number):
+    if number < 0:
+        if getItemNumber(player, item) < - number:
+            return False
     setItemNumber(player, item, getItemNumber(player, item) + number)
+    return True
