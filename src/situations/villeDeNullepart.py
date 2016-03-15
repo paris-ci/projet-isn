@@ -8,7 +8,7 @@ from util import progress, showInventory
 
 def base(d, player):
     code, tag = d.menu("Vous etes arrivé a la ville de NullePart. La ville est grande. Il y a quelques passants. ",
-                       choices=[("(1)", "-------"),
+                       choices=[("(1)", "-- [ TODO ] --"),
                                 ("(2)", "Prendre le bus jusqu'à la maison (2x or)"),
                                 ("(3)", "Rentrer vers la pleine"),
                                 ("(4)", "Afficher mon inventaire")
