@@ -20,8 +20,9 @@ import situations.bois
 import situations.maison
 import situations.mine
 import situations.tutorial
-import situations.terreDeChaisPaOu
+import situations.terreDeChaisPasOu
 import situations.magasinTDCPO
+import situations.villeDeNullepart
 
 __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
@@ -147,9 +148,11 @@ def game(player):
         elif loc == "tutorial":
             ret = situations.tutorial.base(d, player)
         elif loc == "terreDeChaisPasOu":
-            ret = situations.terreDeChaisPaOu.base(d, player)
+            ret = situations.terreDeChaisPasOu.base(d, player)
         elif loc == "magasinTDCPO":
             ret = situations.magasinTDCPO.base(d, player)
+        elif loc == "villeDeNullepart":
+            ret = situations.villeDeNullepart.base(d, player)
         else:
             raise FileNotFoundError
 

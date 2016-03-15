@@ -11,10 +11,11 @@ from util import progress, showInventory
 
 
 def base(d, player):
-    code, tag = d.menu("Vous etes dans une grande pleine. Un panneau indique : \"terre de chais pas où\". Il semble y avoir une boutique un peu plus loin.",
+    code, tag = d.menu("Vous etes dans une grande pleine. Un panneau indique : \"terre de chais pas où\". Le reste du panneau est effacé. Il semble y avoir une boutique un peu plus loin.",
                        choices=[("(1)", "Aller dans le magasin"),
-                                ("(2)", "Rentrer à la fôret"),
-                                ("(3)", "Afficher mon inventaire")
+                                ("(2)", "Continuer sur le santier"),
+                                ("(3)", "Rentrer à la fôret"),
+                                ("(4)", "Afficher mon inventaire")
                                 ],
                        ok_label="Ok, je veux faire ca",
                        cancel_label="Préférances/Quitter")
@@ -24,11 +25,20 @@ def base(d, player):
             database.players.changePref(player, "location", "magasinTDCPO")
             return True
         elif tag == "(2)":
+            if database.inventory.getItemNumber(player, "lunettes") != 0:
+                progress(d, 60, "Vous continuez sur le santier. Il est quasiment invisible.")
+                database.players.changePref(player, "location", "villeDeNullepart")
+                return True
+            else:
+                d.msgbox("Impossible. Le chemin est presque indiscernable à partir d'ici !")
+                return True
+
+        elif tag == "(3)":
             progress(d, 25, "Vous rebroussez chemain vers la forèt")
             database.players.changePref(player, "location", "bois")
             return True
 
-        elif tag == "(3)":
+        elif tag == "(4)":
             showInventory(d, player)
             return True
     else:
