@@ -25,3 +25,14 @@ def base(d, player):
             progress(d, 15, "Vous allez au poste de police")
             database.players.changePref(player, "location", "posteDePolice")
             return True
+        elif tag == "(4)":
+            progress(d, 15, "Vous allez au chateau")
+            database.players.changePref(player, "location", "chateau")
+            return True
+        elif tag == "(5)":
+            progress(d, 15, "Vous allez à l'entrée de la ville")
+            database.players.changePref(player, "location", "villeDeNullepart")
+            return True
+
+    else:
+        return "pref"
