@@ -20,6 +20,7 @@ import situations.tutorial
 import situations.terreDeChaisPasOu
 import situations.magasinTDCPO
 import situations.villeDeNullepart
+import situations.centreVille
 
 __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
@@ -155,6 +156,8 @@ def game(player):
             ret = situations.magasinTDCPO.base(d, player)
         elif loc == "villeDeNullepart":
             ret = situations.villeDeNullepart.base(d, player)
+        elif loc == "centreVille":
+            ret = situations.centreVille.base(d, player)
         else:
             raise FileNotFoundError
 
