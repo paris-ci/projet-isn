@@ -8,7 +8,7 @@ from util import progress, showInventory
 
 def base(d, player):
     code, tag = d.menu("Vous etes arrivé a la ville de NullePart. La ville est grande. Il y a quelques passants. ",
-                       choices=[("(1)", "-- [ TODO ] --"),
+                       choices=[("(1)", "Aller au centre ville"),
                                 ("(2)", "Prendre le bus jusqu'à la maison (2x or)"),
                                 ("(3)", "Rentrer vers la pleine"),
                                 ("(4)", "Afficher mon inventaire")
@@ -17,6 +17,8 @@ def base(d, player):
                        cancel_label="Préférances/Quitter")
     if code == d.OK:
         if tag == "(1)":
+            progress(d, 15, "vous marcher jusqu'au centre ville.")
+            database.players.changePref(player, "location", "centreVille")
             return True
         elif tag == "(2)":
             if database.inventory.addToInventory(player, "or", -2):

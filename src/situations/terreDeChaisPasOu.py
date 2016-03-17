@@ -11,14 +11,15 @@ from util import progress, showInventory
 
 
 def base(d, player):
-    code, tag = d.menu("Vous etes dans une grande pleine. Un panneau indique : \"terre de chais pas où\". Le reste du panneau est effacé. Il semble y avoir une boutique un peu plus loin.",
-                       choices=[("(1)", "Aller dans le magasin"),
-                                ("(2)", "Continuer sur le santier"),
-                                ("(3)", "Rentrer à la fôret"),
-                                ("(4)", "Afficher mon inventaire")
-                                ],
-                       ok_label="Ok, je veux faire ca",
-                       cancel_label="Préférances/Quitter")
+    code, tag = d.menu(
+        "Vous etes dans une grande pleine. Un panneau indique : \"terre de chais pas où\". Le reste du panneau est effacé. Il semble y avoir une boutique un peu plus loin.",
+        choices=[("(1)", "Aller dans le magasin"),
+                 ("(2)", "Continuer sur le santier"),
+                 ("(3)", "Rentrer à la fôret"),
+                 ("(4)", "Afficher mon inventaire")
+                 ],
+        ok_label="Ok, je veux faire ca",
+        cancel_label="Préférances/Quitter")
     if code == d.OK:
         if tag == "(1)":
             progress(d, 3, "Vous allez vers la boutique.")
@@ -43,4 +44,3 @@ def base(d, player):
             return True
     else:
         return "pref"
-

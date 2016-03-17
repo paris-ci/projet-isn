@@ -4,6 +4,7 @@
 
 import database.players
 
+
 def base(d, player):
     d.msgbox("""Bienvenue sur ce RPG, """ + player + """.
 Je suis le MJ. Je vais t'apprendre les bases du jeu, afin que tu puisse t'en sortir une fois laché dans la nature.
@@ -14,4 +15,3 @@ Je vais te déposer à ta maison, d'ou tu pourra débuter ton aventure.
 Bon jeu!""")
     database.players.changePref(player, "location", "maison")
     return True
-
