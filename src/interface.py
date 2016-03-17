@@ -113,7 +113,8 @@ def pref(player):
         # - streetmoney >> Donne 1000 or.
         # - homesweethome >> Téléportation instantanée à la maison
         # - unmarsetca >> Multiplie par 10 la quantitée de chaque objet possédé
-
+        # - bugseverywhere >> Fait planter le jeu.
+        # - GlaDOS >> Donne une PATATE.
 
         if code == d.OK:
             if text == "streetmoney":
@@ -126,6 +127,10 @@ def pref(player):
                     if int(item["quantity"]) != 0:
                         newqtity = int(item["quantity"]) * 10 - int(item["quantity"])
                         database.inventory.addToInventory(player, item["name"], newqtity)
+            elif text == "bugseverywhere":
+                raise Exception
+            elif text == "GlaDOS":
+                database.inventory.addToInventory(player, "patate", 1)
             else:
                 d.msgbox("Le MJ : Je ne comprends pas votre demande.")
 
