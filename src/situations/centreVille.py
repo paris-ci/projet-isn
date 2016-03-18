@@ -1,4 +1,6 @@
-﻿import database.inventory
+﻿# -*- coding:Utf-8 -*-
+# !/usr/bin/env python3.5
+# Le bois prés de la maison, pour trouver des brindilles et de la terre
 import database.players
 from util import progress
 
@@ -12,7 +14,7 @@ def base(d, player):
                                 ("(5)", "Retourner à l'entrée de la ville")
                                 ],
                        ok_label="OK, je veux faire ca",
-                       cancel_label="en fait non je veux plus")
+                       cancel_label="Préférances/Quitter")
     if code == d.OK:
         if tag == "(1)":
             progress(d, 60, "Un policier vous prend pour un mendiant et vous envoie en prison")
