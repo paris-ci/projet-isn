@@ -8,7 +8,7 @@ from util import progress, showInventory
 
 
 def base(d, player):
-    code, tag = d.menu("CET ENDROI N'EXISTE PAS ENCORE !?",
+    code, tag = d.menu("CET ENDROIT N'EXISTE PAS ENCORE !?",
                        choices=[("(1)", "---"),
                                 ("(2)", "Revenir a la ville"),
                                 ("(3)", "Afficher mon inventaire")],
