@@ -14,13 +14,13 @@ def base(d, player):
                 cancel_label="en fait non je veux plus")
     if code == d.OK:
         if tag == "(1)":
-                if database.inventory.getItemNumber(player, "gourdin") <= 0:
+            if database.inventory.getItemNumber(player, "gourdin") <= 0:
                 d.msgbox("""Faites attention dans les quartiers malfamés de la ville.Comment ça les quartiers malfamés?
                   Oui les quartiers du sud ils regorgent de malfrats,alors faites attention si vous y aller.
                   D'accord merci. Prenez ça pour vous défendre """)
                   database.inventory.addToInventory(player, "gourdin", 1)
-                else:
-                    d.msgbox("Faites attention dans les quartiers du sud, Mais ne faites pas l'idiot avec ce gourdin")
+            else:
+                d.msgbox("Faites attention dans les quartiers du sud, Mais ne faites pas l'idiot avec ce gourdin")
 
             elif tag == "(2)":
                 progress(d,5, "Vous rentrez dans la prison")
