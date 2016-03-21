@@ -1,4 +1,4 @@
-﻿# Créé par tflecheux, le 17/03/2016 en Python 3.2
+# Créé par tflecheux, le 17/03/2016 en Python 3.2
 import database.inventory
 import database.players
 from util import progress, showInventory
