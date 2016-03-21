@@ -24,6 +24,7 @@ import situations.centreVille
 import situations.posteDePolice
 import situations.chateau
 import situations.quartierCommercant
+import situations.prison
 
 __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
@@ -165,6 +166,8 @@ def game(player):
             ret = situations.chateau.base(d, player)
         elif loc == "posteDePolice":
             ret = situations.posteDePolice.base(d, player)
+        elif loc == "prison":
+            ret = situations.prison.base(d, player)
         elif loc == "quartierCommercant":
             ret = situations.quartierCommercant.base(d, player)
         else:
