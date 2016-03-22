@@ -65,7 +65,7 @@ Prendss mes lunettes et vas-y !""")
                 d.msgbox("As-tu pu visiter la ville ?")
 
         elif tag == "(6)":
-            progress(d, 3, "Vous rebroussez chemain vers la plaine")
+            progress(d, 3, "Vous rebroussez chemain vers la plaine", player)
             database.players.changePref(player, "location", "terreDeChaisPasOu")
             return True
 

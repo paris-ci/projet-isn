@@ -17,12 +17,12 @@ def base(d, player):
     if code == d.OK:
         if tag == "(1)":
             d.msgbox("Vous minez dans la grotte environnante")
-            progress(d, 20, "Vous minez...")
+            progress(d, 20, "Vous minez...", player)
             database.inventory.addToInventory(player, "pierre", 10)
             d.msgbox("Vous trouvez 10 pierres.")
             return True
         elif tag == "(2)":
-            progress(d, 20, "Vous rentrez de la mine")
+            progress(d, 20, "Vous rentrez de la mine", player)
             database.players.changePref(player, "location", "maison")
             return True
         elif tag == "(3)":

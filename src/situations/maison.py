@@ -18,11 +18,11 @@ def base(d, player):
                        cancel_label="Préférances/Quitter")
     if code == d.OK:
         if tag == "(1)":
-            progress(d, 20, "Vous allez vers la mine")
+            progress(d, 20, "Vous allez vers la mine", player)
             database.players.changePref(player, "location", "mine")
             return True
         elif tag == "(2)":
-            progress(d, 10, "Vous marchez vers le bois...")
+            progress(d, 10, "Vous marchez vers le bois...", player)
             database.players.changePref(player, "location", "bois")
             return True
 

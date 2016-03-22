@@ -17,12 +17,12 @@ def base(d, player):
                        cancel_label="Préférances/Quitter")
     if code == d.OK:
         if tag == "(1)":
-            progress(d, 15, "Vous marchez jusqu'au centre ville.")
+            progress(d, 15, "Vous marchez jusqu'au centre ville.", player)
             database.players.changePref(player, "location", "centreVille")
             return True
         elif tag == "(2)":
             if database.inventory.addToInventory(player, "or", -2):
-                progress(d, 10, "Le bus vous ramene chez vous.")
+                progress(d, 10, "Le bus vous ramene chez vous.", player)
                 database.players.changePref(player, "location", "maison")
                 return True
             else:
@@ -30,7 +30,7 @@ def base(d, player):
                 return True
 
         elif tag == "(3)":
-            progress(d, 60, "Vous rebroussez chemain vers la plaine")
+            progress(d, 60, "Vous rebroussez chemain vers la plaine", player)
             database.players.changePref(player, "location", "terreDeChaisPasOu")
             return True
 

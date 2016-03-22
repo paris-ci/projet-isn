@@ -136,6 +136,10 @@ def pref(player):
                 raise Exception
             elif text == "GlaDOS":
                 database.inventory.addToInventory(player, "patate", 1)
+            elif text == "iwanttogonullepart":
+                database.players.changePref(player, "location", "villeDeNullepart")
+            elif text == "putainavance":
+                database.inventory.addToInventory(player, "anneau de transport", 1)
             else:
                 d.msgbox("Le MJ : Je ne comprends pas votre demande.")
 

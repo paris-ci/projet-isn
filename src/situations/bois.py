@@ -18,17 +18,17 @@ def base(d, player):
     if code == d.OK:
         if tag == "(1)":
             d.msgbox("Vous creusez dans ce bois.")
-            progress(d, 20, "Vous creusez la terre...")
+            progress(d, 20, "Vous creusez la terre...", player)
             database.inventory.addToInventory(player, "brindilles", 20)
             database.inventory.addToInventory(player, "terre", 5)
             d.msgbox("Vous trouvez 5 terre et 2 brindilles.")
             return True
         elif tag == "(2)":
-            progress(d, 25, "Vous continuez sur le sentier... Il semble en bien plus mauvais état !")
+            progress(d, 25, "Vous continuez sur le sentier... Il semble en bien plus mauvais état !", player)
             database.players.changePref(player, "location", "terreDeChaisPasOu")
             return True
         elif tag == "(3)":
-            progress(d, 10, "Vous rentrez à la maison...")
+            progress(d, 10, "Vous rentrez à la maison...", player)
             database.players.changePref(player, "location", "maison")
             return True
         elif tag == "(4)":

@@ -11,7 +11,10 @@ import time
 import database.inventory
 
 
-def progress(d, pause, text):
+def progress(d, pause, text, player):
+    div = int(database.inventory.getItemNumber(player, "anneau de transport"))
+    if div >= 1:
+        pause /= div + 1
     d.gauge_start(text=text, width=130)
     for i in range(0, 100):
         d.gauge_update(i)
