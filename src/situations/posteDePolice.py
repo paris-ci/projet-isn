@@ -27,7 +27,7 @@ def base(d, player):
                 if code == d.OK:
 
                     if tag == "(1)":
-                        d.msgbox("Vous, vous êtes pas d'ici non?\nPrenez ça pour vous défendre mais ne l'utilisez qu'en cas de défence c'est clair ")
+                        d.msgbox("Vous, vous êtes pas d'ici non?\nPrenez ça pour vous défendre mais ne l'utilisez qu'en cas de défence, c'est clair ?")
                         database.inventory.addToInventory(player, "gourdin", 1)
                     elif tag == "(2)":
                         d.msgbox("Sur ce, bonne journée et ne causez pas de troubles")
