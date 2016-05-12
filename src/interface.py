@@ -1,3 +1,4 @@
+# coding: utf8
 # -*- coding:Utf-8 -*-
 # !/usr/bin/env python3.5
 
@@ -44,7 +45,7 @@ def auth():
     if database.players.playerExist(player) and code == d.OK:
         d.msgbox("Bonjour " + player + " !")
         code, password = d.passwordbox(
-                "Entrez votre mot de passe. Celui ci ne s'affiche pas pour des rasions de sécurité")
+                str("Entrez votre mot de passe."), insecure=True)
         if password == database.players.playerDict(player)["password"] and code == d.OK:
             d.msgbox("Je vois que c'est bien vous :D ! Venez avec moi...")
             return player
@@ -202,14 +203,15 @@ if __name__ == '__main__':
     try:
         main()
     except Exception as e:
-
+        client.captureException()
         os.system('cls' if os.name == 'nt' else 'clear')  # Efface l'écran
+
         print("Malheureusement, une erreur est survenue (" + str(e) + "). Nous nous en excusons. Veuillez envoyer le rapport d'erreur suivant ainsi qu'un bref résumé des vos actions sur GitHub en suivant le lien suivant : https://github.com/paris-ci/projet-isn/issues")
         #client.user_context({
         #    'last_steps': input("Que venez vous de faire juste avant l'erreur ? >")
         #})
-        time.sleep(2)
+        time.sleep(20)
         print("=== DEBUT RAPPORT ERREUR ENVOYE AUTOMATIQUEMENT===")
-        client.captureException()
+        #client.captureException()
         raise
 
