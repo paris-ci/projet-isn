@@ -18,16 +18,17 @@ def base(d, player):
             if database.inventory.getItemNumber(player, "gourdin") <= 0:
                 d.msgbox("""Faites attention dans les quartiers malfamés de la ville.""")
                 code, tag = d.menu("Que dire ?",
-                choices=[
-                        ("(1)", "Quels quartiers?"),
-                        ("(2)", "D'accord")
-                ],
-                ok_label="Dire ca",
-                cancel_label="Partir en courant")
+                                   choices=[
+                                       ("(1)", "Quels quartiers?"),
+                                       ("(2)", "D'accord")
+                                   ],
+                                   ok_label="Dire ca",
+                                   cancel_label="Partir en courant")
                 if code == d.OK:
 
                     if tag == "(1)":
-                        d.msgbox("Vous, vous êtes pas d'ici non?\nPrenez ça pour vous défendre mais ne l'utilisez qu'en cas de défence, c'est clair ?")
+                        d.msgbox(
+                            "Vous, vous êtes pas d'ici non?\nPrenez ça pour vous défendre mais ne l'utilisez qu'en cas de défence, c'est clair ?")
                         database.inventory.addToInventory(player, "gourdin", 1)
                     elif tag == "(2)":
                         d.msgbox("Sur ce, bonne journée et ne causez pas de troubles")
@@ -40,7 +41,8 @@ def base(d, player):
                 d.msgbox("Faites attention dans les quartiers du sud, Mais ne faites pas l'idiot avec ce gourdin")
 
         elif tag == "(2)":
-            progress(d, 5, "Vous là! Vous essayez de libérer des prisonniers,\nça tombe bien vous allez les rejoindre", player)
+            progress(d, 5, "Vous là! Vous essayez de libérer des prisonniers,\nça tombe bien vous allez les rejoindre",
+                     player)
             database.players.changePref(player, "location", "prison")
             return True
 

@@ -15,17 +15,27 @@ from dialog import Dialog
 import database.inventory
 import database.players
 import situations.bois
-import situations.maison
-import situations.mine
-import situations.tutorial
-import situations.terreDeChaisPasOu
-import situations.magasinTDCPO
-import situations.villeDeNullepart
 import situations.centreVille
-import situations.posteDePolice
 import situations.chateau
-import situations.quartierCommercant
+import situations.magasinTDCPO
+import situations.maison
+import situations.marchandArme
+import situations.marchandMateriaux
+import situations.mine
+import situations.monstreTaverne
+import situations.montagne
+import situations.pharmacie
+import situations.posteDePolice
 import situations.prison
+import situations.quartierCommercant
+import situations.quartierSud
+import situations.salleDuTrone
+import situations.taverne
+import situations.terreDeChaisPasOu
+import situations.tutorial
+import situations.villeDeNullepart
+
+
 
 __author__ = "Arthur — paris-ci"
 __licence__ = "WTFPL — 2016"
@@ -151,30 +161,48 @@ def game(player):
     os.system('cls' if os.name == 'nt' else 'clear')  # Efface l'écran
     while True:
         loc = database.players.playerDict(player)["location"]
-        if loc == "maison":
-            ret = situations.maison.base(d, player)
-        elif loc == "mine":
-            ret = situations.mine.base(d, player)
-        elif loc == "bois":
+        if loc == "bois":
             ret = situations.bois.base(d, player)
-        elif loc == "tutorial":
-            ret = situations.tutorial.base(d, player)
-        elif loc == "terreDeChaisPasOu":
-            ret = situations.terreDeChaisPasOu.base(d, player)
-        elif loc == "magasinTDCPO":
-            ret = situations.magasinTDCPO.base(d, player)
-        elif loc == "villeDeNullepart":
-            ret = situations.villeDeNullepart.base(d, player)
         elif loc == "centreVille":
             ret = situations.centreVille.base(d, player)
         elif loc == "chateau":
             ret = situations.chateau.base(d, player)
+        elif loc == "magasinTDCPO":
+            ret = situations.magasinTDCPO.base(d, player)
+        elif loc == "maison":
+            ret = situations.maison.base(d, player)
+        elif loc == "marchandArme":
+            ret = situations.marchandArme.base(d, player)
+        elif loc == "marchandMateriaux":
+            ret = situations.marchandMateriaux.base(d, player)
+        elif loc == "mine":
+            ret = situations.mine.base(d, player)
+        elif loc == "monstreTaverne":
+            ret = situations.monstreTaverne.base(d, player)
+        elif loc == "montagne":
+            ret = situations.montagne.base(d, player)
+        elif loc == "pharmacie":
+            ret = situations.pharmacie.base(d, player)
         elif loc == "posteDePolice":
             ret = situations.posteDePolice.base(d, player)
         elif loc == "prison":
             ret = situations.prison.base(d, player)
         elif loc == "quartierCommercant":
             ret = situations.quartierCommercant.base(d, player)
+        elif loc == "quartierSud":
+            ret = situations.quartierSud.base(d, player)
+        elif loc == "salleDuTrone":
+            ret = situations.salleDuTrone.base(d, player)
+        elif loc == "taverne":
+            ret = situations.taverne.base(d, player)
+        elif loc == "terreDeChaisPasOu":
+            ret = situations.terreDeChaisPasOu.base(d, player)
+        elif loc == "tutorial":
+            ret = situations.tutorial.base(d, player)
+        elif loc == "villeDeNullepart":
+            ret = situations.villeDeNullepart.base(d, player)
+
+
         else:
             raise FileNotFoundError
 

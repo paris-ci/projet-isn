@@ -12,9 +12,9 @@ from util import progress, showInventory
 
 def base(d, player):
     code, tag = d.menu(
-        "Vous etes dans une grande pleine. Un panneau indique : \"terre de chais pas où\". Le reste du panneau est effacé. Il semble y avoir une boutique un peu plus loin.",
+        "Vous etes dans une grande plaine. Un panneau indique : \"terre de chais pas où\". Le reste du panneau est effacé. Il semble y avoir une boutique un peu plus loin.",
         choices=[("(1)", "Aller dans le magasin"),
-                 ("(2)", "Continuer sur le sentier"),
+                 ("(2)", "Continuer sur le santier"),
                  ("(3)", "Rentrer à la fôret"),
                  ("(4)", "Afficher mon inventaire")
                  ],
@@ -35,7 +35,7 @@ def base(d, player):
                 return True
 
         elif tag == "(3)":
-            progress(d, 25, "Vous rebroussez chemin vers la forèt", player)
+            progress(d, 25, "Vous rebroussez chemain vers la forèt", player)
             database.players.changePref(player, "location", "bois")
             return True
 
